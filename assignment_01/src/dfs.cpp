@@ -1,6 +1,8 @@
 #include <iostream>
 #include <vector>
 #include "graph.h"
+#include <fstream>
+extern std::ofstream fout;
 
 using namespace std;
 // recursive dfs function
@@ -9,7 +11,8 @@ void dfsUtil(int v, CSRGraph &g, vector<bool> &vis)
     //mark current vertex is visited
     vis[v] = true;
 
-    cout <<v<<" ";
+    cout << v << " ";
+    fout << v << " ";
     //traverse all neighbours of current vertex
     for (int i= g.row_ptr[v]; i<g.row_ptr[v + 1];i++)
     {
@@ -32,7 +35,12 @@ void dfs(CSRGraph &g,int src)
     cout << "Source : " << src << endl;
     cout << "Traversal : ";
 
+    fout << "Algorithm : DFS" << endl;
+    fout << "Source : " << src << endl;
+    fout << "Traversal : ";
+
     dfsUtil(src, g, vis);
 
     cout << endl;
+    fout << endl;
 }

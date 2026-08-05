@@ -11,7 +11,7 @@ using namespace chrono;
 
 ofstream fout;
 
-// Function declaration
+// Function predeclaration
 void dijkstra(const WeightedCSRGraph &graph,
               int source,
               vector<int> &dist,
@@ -23,7 +23,8 @@ int main()
 
     cout << "Enter graph file : ";
     cin >> filename;
-
+     
+    //weighted csr 
     WeightedCSRGraph graph = loadWeightedCSRGraph(filename);
 
     if(graph.num_vertices == 0)
@@ -47,11 +48,11 @@ int main()
 
     vector<int> dist;
     vector<int> parent;
-
+   // clock start 
     auto start = high_resolution_clock::now();
-
+    //dijkstra
     dijkstra(graph, source, dist, parent);
-
+   // clock end
     auto stop = high_resolution_clock::now();
 
     double time =
@@ -74,7 +75,6 @@ int main()
     for(int i=0;i<graph.num_vertices;i++)
     {
         cout << i << "\t";
-
         fout << i << "\t";
 
         if(dist[i]==INT_MAX)

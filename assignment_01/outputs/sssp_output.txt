@@ -1,0 +1,12 @@
+Algorithm: SSSP
+Source: 0
+
+Vertex	Distance
+0	0
+1	7
+2	9
+3	11
+4	20
+5	13
+
+Execution time: 0 ms

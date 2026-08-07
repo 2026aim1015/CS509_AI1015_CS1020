@@ -33,7 +33,8 @@ CSRGraph loadCSRGraph(const string& filename) {
 
         stringstream ss(line);
         string first_token;
-        ss >> first_token;
+
+        if(!(ss >> first_token)) continue;
 
         // Stop or skip if we encounter the SOURCE specifier at the end
         if (first_token == "SOURCE") continue;

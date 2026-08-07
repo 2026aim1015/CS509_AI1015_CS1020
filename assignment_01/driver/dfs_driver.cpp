@@ -1,15 +1,7 @@
-<<<<<<< HEAD
 #include<iostream>
-#include <vector>
-#include <queue>
-#include "graph.h"
-
-void runBFS(const CSRGraph& graph, int source,vector<int>)
-=======
-#include <iostream>
-#include <chrono>
-#include <string>
-#include <fstream>
+#include<chrono>
+#include<string>
+#include<fstream>
 #include "../src/graph.h"
 using namespace std;
 using namespace std::chrono;
@@ -59,4 +51,4 @@ int main()
     fout.close();
     return 0;
 }
->>>>>>> 3507c79105c3329c334410d661b2465207d31982
+

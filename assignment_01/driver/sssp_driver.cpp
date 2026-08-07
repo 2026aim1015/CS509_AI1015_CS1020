@@ -17,26 +17,19 @@ void dijkstra(const WeightedCSRGraph &graph,
               vector<int> &dist,
               vector<int> &parent);
 
-int main()
+int main(int argc, char* argv[])
 {
-    string filename;
+    if(argc < 2)
+{
+    cerr << "Usage: " << argv[0]
+         << " <graph_file> [source_node]" << endl;
+    return 1;
+}
 
-    cout << "Enter graph file : ";
-    cin >> filename;
-     
-    //weighted csr 
-    WeightedCSRGraph graph = loadWeightedCSRGraph(filename);
+string filename = argv[1];
+int source = (argc >= 3) ? stoi(argv[2]) : 0;
 
-    if(graph.num_vertices == 0)
-    {
-        cout << "Graph loading failed." << endl;
-        return 0;
-    }
-
-    int source;
-
-    cout << "Enter source vertex : ";
-    cin >> source;
+WeightedCSRGraph graph = loadWeightedCSRGraph(filename);
 
     if(source < 0 || source >= graph.num_vertices)
     {

@@ -10,25 +10,19 @@ ofstream fout;
 //dfs function declaration
 void dfs(CSRGraph &g,int src);
 
-int main()
+int main(int argc, char* argv[])
 {
-    string file;
-    //take input file
-    cout<<"Enter file name : ";
-    cin>>file;
-    //load graph into csr format
-    CSRGraph g = loadCSRGraph(file);
-    //check whether graph is loaded successfully 
-    if (g.num_vertices == 0)
-    {
-        cout<<"Graph loading failed."<<endl;
-        return 0;
-    }
+    if(argc < 2)
+{
+    cerr << "Usage: " << argv[0]
+         << " <graph_file> [source_node]" << endl;
+    return 1;
+}
 
-    int src;
-    //read the source vertex
-    cout<<"Enter source vertex : ";
-    cin>>src;
+string file = argv[1];
+int src = (argc >= 3) ? stoi(argv[2]) : 0;
+
+CSRGraph g = loadCSRGraph(file);
     fout.open("outputs/dfs_output.txt");
     fout << "Algorithm: DFS" << endl;
     fout << "Source: " << src << endl;

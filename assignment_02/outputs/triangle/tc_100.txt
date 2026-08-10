@@ -1,0 +1,8 @@
+Algorithm: Triangle Counting
+Triangles found:
+(9, 10, 11)
+(11, 12, 58)
+(27, 88, 97)
+(29, 93, 94)
+Total triangles: 4
+Execution time: 3.965 ms

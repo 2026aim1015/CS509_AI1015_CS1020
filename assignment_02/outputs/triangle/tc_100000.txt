@@ -1,0 +1,10 @@
+Algorithm: Triangle Counting
+Triangles found:
+(2486, 2487, 23595)
+(6335, 6336, 84861)
+(10924, 53653, 53654)
+(28585, 28586, 30844)
+(39904, 51373, 51374)
+(63667, 63668, 63669)
+Total triangles: 6
+Execution time: 35.473 ms

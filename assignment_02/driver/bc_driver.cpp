@@ -1,6 +1,6 @@
-#include "graph.h"
-#include "betweenness_centrality.hpp"
-#include "timer.hpp"
+#include "../include/graph.h"
+#include "../include/betweenness_centrality.hpp"
+#include "../include/timer.hpp"
 #include <iostream>
 #include <iomanip>
 #include <fstream>

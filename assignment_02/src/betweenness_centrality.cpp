@@ -1,4 +1,4 @@
-#include "betweenness_centrality.hpp"
+#include "../include/betweenness_centrality.hpp"
 #include <queue>
 #include <stack>
 #include <vector>

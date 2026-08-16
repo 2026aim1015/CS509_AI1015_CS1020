@@ -1,4 +1,4 @@
-#include "../include/gradient_descent.h"
+#include "gradient_descent.h"
 #include "timer.hpp"
 #include <iostream>
 #include <iomanip>
@@ -13,7 +13,7 @@ int main(int argc, char* argv[]) {
     GDInput input;
 
     try {
-        // Preprocessing: untimed file read
+        // Untimed preprocessing
         input = loadGDInput(filepath);
 
         Timer timer;
@@ -21,14 +21,15 @@ int main(int argc, char* argv[]) {
         GDResult result = runGradientDescent(input);
         timer.stop();
 
-        std::cout << std::fixed << std::setprecision(6);
+        // Exact formatting matching Section 6.3
         std::cout << "Algorithm: Gradient Descent\n";
-        std::cout << "Polynomial Degree: " << input.degree << "\n";
-        std::cout << "Initial Point (x0): " << input.x0 << "\n";
-        std::cout << "Optimal x: " << result.optimal_x << "\n";
-        std::cout << "Optimal f(x): " << result.optimal_fx << "\n";
+        std::cout << "Degree: " << input.degree << "\n";
+        std::cout << std::fixed << std::setprecision(6);
+        std::cout << "Final x: approximately " << result.optimal_x << "\n";
+        std::cout << "Final f(x): approximately " << result.optimal_fx << "\n";
         std::cout << "Iterations: " << result.iterations_taken << "\n";
         std::cout << "Converged: " << (result.converged ? "true" : "false") << "\n";
+        std::cout << std::setprecision(4);
         std::cout << "Execution time: " << timer.elapsedMs() << " ms\n";
 
     } catch (const std::exception& e) {

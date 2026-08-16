@@ -12,10 +12,11 @@ CSRGraph loadCSRGraph(const std::string& filename)
         return graph;
     }
     int V, E;
+    //take no of vertices and edge from graph
     file>>V>>E;
     graph.num_vertices = V;
     graph.num_edges = E;
-
+    //size of row_ptr taken according to number of vertices
     graph.row_ptr.resize(V + 1, 0);
 
     std::vector<std::vector<int>> neigh(V);
@@ -34,6 +35,7 @@ CSRGraph loadCSRGraph(const std::string& filename)
             cap[u].push_back(capacity);
         }
     }
+    //csr row_ptr tell where u start in col_ind and weights
     for (int u = 0; u < V; u++)
     {
         graph.row_ptr[u + 1] = graph.row_ptr[u] + neigh[u].size();
@@ -45,7 +47,7 @@ CSRGraph loadCSRGraph(const std::string& filename)
     }
     graph.col_ind.resize(t_edges);
     graph.weights.resize(t_edges);
-
+    //fill col_ind and weights
     int index = 0;
     for(int u = 0; u < V; u++)
     {

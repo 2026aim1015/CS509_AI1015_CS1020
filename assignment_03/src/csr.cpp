@@ -1,63 +1,114 @@
 #include "../include/graph.h"
+
 #include <fstream>
 #include <iostream>
 
 CSRGraph loadCSRGraph(const std::string& filename)
 {
     CSRGraph graph;
+
     std::ifstream file(filename);
-    if(!file.is_open())
+
+    if (!file.is_open())
     {
-        std::cerr<<"Error: Could not open input file: "<<filename<<std::endl;
+        std::cerr << "Error: Could not open input file."
+                  << std::endl;
+
         return graph;
     }
-    int V, E;
-    //take no of vertices and edge from graph
-    file>>V>>E;
+
+    int V;
+    int E;
+
+    file >> V >> E;
+
     graph.num_vertices = V;
     graph.num_edges = E;
-    //size of row_ptr taken according to number of vertices
+
     graph.row_ptr.resize(V + 1, 0);
 
-    std::vector<std::vector<int>> neigh(V);
-    std::vector<std::vector<double>> cap(V);
-
-    for(int u = 0; u < V; u++)
-    {
-        int degree;
-        file >> degree;
-        for(int j=0;j<degree;j++)
-        {
-            int v;
-            double capacity;
-            file >> v >> capacity;
-            neigh[u].push_back(v);
-            cap[u].push_back(capacity);
-        }
-    }
-    //csr row_ptr tell where u start in col_ind and weights
     for (int u = 0; u < V; u++)
     {
-        graph.row_ptr[u + 1] = graph.row_ptr[u] + neigh[u].size();
+        int vertex;
+        int degree;
+
+        file >> vertex >> degree;
+
+        graph.row_ptr[vertex + 1] =
+            graph.row_ptr[vertex] + degree;
     }
-    int t_edges = graph.row_ptr[V];
-    if (t_edges!= E)
+
+    file.clear();
+    file.seekg(0);
+
+    file >> V >> E;
+
+    std::vector<int> degrees(V);
+
+    for (int u = 0; u < V; u++)
     {
-        std::cerr<<"Warning: Edge count does not match input."<<std::endl;
-    }
-    graph.col_ind.resize(t_edges);
-    graph.weights.resize(t_edges);
-    //fill col_ind and weights
-    int index = 0;
-    for(int u = 0; u < V; u++)
-    {
-        for(int j=0;j<neigh[u].size(); j++)
+        int vertex;
+        int degree;
+
+        file >> vertex >> degree;
+
+        degrees[vertex] = degree;
+
+        for (int j = 0; j < degree; j++)
         {
-            graph.col_ind[index] = neigh[u][j];
-            graph.weights[index] = cap[u][j];
-            index++;
+            int neighbor;
+            double capacity;
+
+            file >> neighbor >> capacity;
         }
     }
+
+    graph.row_ptr[0] = 0;
+
+    for (int u = 0; u < V; u++)
+    {
+        graph.row_ptr[u + 1] =
+            graph.row_ptr[u] + degrees[u];
+    }
+
+    int total_edges = graph.row_ptr[V];
+
+    if (total_edges != E)
+    {
+        std::cerr << "Warning: Edge count does not match input."
+                  << std::endl;
+    }
+
+    graph.col_ind.resize(total_edges);
+    graph.weights.resize(total_edges);
+
+    file.clear();
+    file.seekg(0);
+
+    file >> V >> E;
+
+    for (int u = 0; u < V; u++)
+    {
+        int vertex;
+        int degree;
+
+        file >> vertex >> degree;
+
+        int start = graph.row_ptr[vertex];
+
+        for (int j = 0; j < degree; j++)
+        {
+            int neighbor;
+            double capacity;
+
+            file >> neighbor >> capacity;
+
+            graph.col_ind[start + j] = neighbor;
+            graph.weights[start + j] = capacity;
+        }
+    }
+
     file.close();
+
     return graph;
 }

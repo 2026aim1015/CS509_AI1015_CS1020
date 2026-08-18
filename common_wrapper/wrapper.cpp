@@ -14,6 +14,7 @@ int main()
         cout<<"Available Assignments\n\n";
         cout<<"1. Assignment 01\n";
         cout<<"2. Assignment 02\n";
+        cout<<"3. Assignment 03\n";
         cout<<"0. Exit\n\n";
 
         cout<<"Enter Assignment Number: ";
@@ -25,7 +26,7 @@ int main()
             break;
         }
 
-        if(assignment_choice != 1 && assignment_choice != 2)
+        if(assignment_choice != 1 && assignment_choice != 2 && assignment_choice != 3)
         {
             cout<<"\nInvalid Assignment!\n";
             continue;
@@ -266,7 +267,59 @@ int main()
                 }
             }
         }
+        if(assignment_choice == 3)
+        {
+            int option;
+            while(true)
+            {
+                cout << "\nAssignment 03 : Maxflow-Mincut\n";
+                cout << "1. Maxflow-Mincut\n";
+                cout << "0. Back\n";
+                cout << "\nEnter Option: ";
+                cin >> option;
+                if(option == 0)
+                    break;
+                int test_no;
+                string file;
+                string output_file;
+                string command;
+                switch(option)
+                {
+                    case 1:
+                    {
+                        cout << "\nSelect Maxflow-Mincut Test File\n";
+                        cout << "1. mm_10.txt\n";
+                        cout << "2. mm_100.txt\n";
+                        cout << "3. mm_1000.txt\n";
+                        cout << "4. mm_10000.txt\n";
+                        cout << "5. mm_50000.txt\n";
+
+                        cout << "Enter choice: ";
+                        cin >> test_no;
+                        if(test_no < 1 || test_no > 5)
+                        {
+                            cout << "Invalid test number!\n";
+                            break;
+                        }
+                        string tests[] =
+                        {
+                            "mm_10.txt",
+                            "mm_100.txt",
+                            "mm_1000.txt",
+                            "mm_10000.txt",
+                            "mm_50000.txt"
+                        };
+                        file = tests[test_no - 1];
+                        command = "cmd /c \"cd assignment_03 && maxflow_mincut.exe tests/maxflow_mincut/" + file + "\"";
+                        system(command.c_str());
+                        break;
+                    }
+                    default:
+                        cout << "\nInvalid Option!\n";
+                }
+       }
     }
+}
 
     return 0;
 }

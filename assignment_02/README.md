@@ -115,11 +115,11 @@ g++ -std=c++17 -O2 -Wall -Wextra -Iinclude src/csr.cpp src/connected_components.
 
 | Test File | Vertices (V) | Total Triangles Discovered | Execution Time (ms) |
 | :--- | :---: | :---: | :---: |
-| `tc_10.txt` | 10 | 12 | 0.0018 |
-| `tc_100.txt` | 100 | 450 | 0.0380 |
-| `tc_10000.txt` | 10000 | 12400 | 3.1200 |
-| `tc_50000.txt` | 50000 | 68500 | 18.4500 |
-| `tc_100000.txt` | 100000 | 142000 | 41.2000 |
+| `tc_10.txt` | 10 | 12 | 0.842 |
+| `tc_100.txt` | 100 | 450 | 3.965|
+| `tc_10000.txt` | 10000 | 12400 | 12.286 |
+| `tc_50000.txt` | 50000 | 68500 | 15.015|
+| `tc_100000.txt` | 100000 | 142000 | 35.473 |
 
 ---
 
@@ -129,10 +129,10 @@ g++ -std=c++17 -O2 -Wall -Wextra -Iinclude src/csr.cpp src/connected_components.
 | Test File | Vertices (V) | Max Centrality Score | Execution Time (ms) |
 | :--- | :---: | :---: | :---: |
 | `bc_10.txt` | 10 | 12.00 | 0.0042 |
-| `bc_100.txt` | 100 | 148.50 | 0.8210 |
-| `bc_1000.txt` | 1000 | 2450.00 | 84.1200 |
-| `bc_5000.txt` | 5000 | 18200.00 | 2140.5000 |
-| `bc_10000.txt` | 10000 | 42150.00 | 9280.3000 |
+| `bc_100.txt` | 100 | 148.50 | 1.0210 |
+| `bc_1000.txt` | 1000 | 2450.00 | 90.0160|
+| `bc_5000.txt` | 5000 | 18200.00 | 2758.7210|
+| `bc_10000.txt` | 10000 | 42150.00 | 10140.390 |
 
 ---
 
@@ -141,10 +141,10 @@ g++ -std=c++17 -O2 -Wall -Wextra -Iinclude src/csr.cpp src/connected_components.
 
 | Test File | Vertices (V) | Total Components Identified | Execution Time (ms) |
 | :--- | :---: | :---: | :---: |
-| `cc_10.txt` | 10 | 3 | 0.0015 |
-| `cc_100.txt` | 100 | 1 | 0.0120 |
-| `cc_10000.txt` | 10000 | 10 | 0.8500 |
-| `cc_50000.txt` | 50000 | 50 | 4.2100 |
+| `cc_10.txt` | 10 | 3 | 0.00 |
+| `cc_100.txt` | 100 | 1 | 0.00|
+| `cc_10000.txt` | 10000 | 10 | 0.00 |
+| `cc_50000.txt` | 50000 | 50 | 1.06|
 | `cc_100000.txt` | 100000 | 100 | 9.1400 |
 
 ---

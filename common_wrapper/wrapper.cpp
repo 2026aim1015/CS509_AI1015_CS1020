@@ -15,6 +15,7 @@ int main()
         cout<<"1. Assignment 01\n";
         cout<<"2. Assignment 02\n";
         cout<<"3. Assignment 03\n";
+        cout<<"4. Assignment 04\n";
         cout<<"0. Exit\n\n";
 
         cout<<"Enter Assignment Number: ";
@@ -26,7 +27,7 @@ int main()
             break;
         }
 
-        if(assignment_choice != 1 && assignment_choice != 2 && assignment_choice != 3)
+        if(assignment_choice != 1 && assignment_choice != 2 && assignment_choice != 3 && assignment_choice != 4)
         {
             cout<<"\nInvalid Assignment!\n";
             continue;
@@ -319,6 +320,105 @@ int main()
                 }
        }
     }
+    if(assignment_choice == 4)
+        {
+            int option;
+
+            while(true)
+            {
+                cout << "\nAssignment 04 :\n";
+                cout << "1. K-Means\n";
+                cout << "2. FastMap\n";
+                cout << "0. Back\n";
+
+                cout << "\nEnter Option: ";
+                cin >> option;
+
+                if(option == 0)
+                    break;
+
+                int test_no;
+                string file;
+                string command;
+
+                switch(option)
+                {
+                    case 1:
+                    {
+                        cout << "\nSelect K-Means Test File\n";
+                        cout << "1. km_01.txt\n";
+                        cout << "2. km_02.txt\n";
+                        cout << "3. km_03.txt\n";
+                        cout << "4. km_04.txt\n";
+
+                        cout << "Enter choice: ";
+                        cin >> test_no;
+
+                        if(test_no < 1 || test_no > 4)
+                        {
+                            cout << "Invalid test number!\n";
+                            break;
+                        }
+
+                        string tests[] =
+                        {
+                            "km_01.txt",
+                            "km_02.txt",
+                            "km_03.txt",
+                            "km_04.txt"
+                        };
+
+                        file = tests[test_no - 1];
+
+                        command =
+                            "cmd /c \"cd assignment_04 && kmeans_driver.exe tests/kmeans/" +
+                            file + "\"";
+
+                        system(command.c_str());
+
+                        break;
+                    }
+
+                    case 2:
+                    {
+                        cout << "\nSelect FastMap Test File\n";
+                        cout << "1. fm_01.txt\n";
+                        cout << "2. fm_02.txt\n";
+                        cout << "3. fm_03.txt\n";
+                        cout << "4. fm_04.txt\n";
+
+                        cout << "Enter choice: ";
+                        cin >> test_no;
+
+                        if(test_no < 1 || test_no > 4)
+                        {
+                            cout << "Invalid test number!\n";
+                            break;
+                        }
+
+                        string tests[] =
+                        {
+                            "fm_01.txt",
+                            "fm_02.txt",
+                            "fm_03.txt",
+                            "fm_04.txt"
+                        };
+
+                        file = tests[test_no - 1];
+
+                        command = "cmd /c \"cd assignment_04 && fastmap.exe tests/fastmap/" +
+                            file + "\"";
+
+                        system(command.c_str());
+
+                        break;
+                    }
+
+                    default:
+                        cout << "\nInvalid Option!\n";
+                }
+            }
+        }
 }
 
     return 0;

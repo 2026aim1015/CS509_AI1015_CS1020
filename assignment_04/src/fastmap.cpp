@@ -6,7 +6,7 @@
 
 using namespace std;
 
-
+// Find the object that is farthest from the given object.
 static int findFarthest(const vector<vector<double>>& distance,int object,int n)
 {
     int farthest = object;
@@ -31,7 +31,7 @@ FastMapResult fastMap(const vector<vector<double>>& distance, int n, int k)
     result.n = n;
     result.k = k;
 
-    // Store coordinates for all objects.
+    // Initialize coordinates for all objects.
     result.coordinates.assign( n, vector<double>(k, 0.0));
 
     // Store pivots for every dimension.
@@ -45,14 +45,15 @@ FastMapResult fastMap(const vector<vector<double>>& distance, int n, int k)
     for (int dim = 0; dim < k; dim++)
     {
         int startObject = 0;
-
+        // Select the first pivot as the farthest object from the start object.
         int pivotA = findFarthest(currentDistance,startObject,n );
+        // Select the second pivot as the farthest object from pivot A.
         int pivotB = findFarthest(currentDistance,pivotA,n);
 
         result.pivotA[dim] = pivotA;
         result.pivotB[dim] = pivotB;
 
-        // Distance between the two pivots.
+        // If the pivots have zero distance, all coordinates in this dimension are set to zero.
         double pivotDistance = currentDistance[pivotA][pivotB];
 
         if (pivotDistance <= 0.0)
@@ -63,18 +64,20 @@ FastMapResult fastMap(const vector<vector<double>>& distance, int n, int k)
             }
             continue;
         }
+        // Calculate the coordinate of every object along this dimension.
         for (int i = 0; i < n; i++)
         {
             double dAi = currentDistance[pivotA][i];
             double dBi = currentDistance[pivotB][i];
-
+            // FastMap coordinate calculation using the distances from the two selected pivots.
             double numerator = (dAi * dAi)+ (pivotDistance * pivotDistance)- (dBi * dBi);
 
             double coordinate =numerator / (2.0 * pivotDistance);
 
             result.coordinates[i][dim] = coordinate;
         }
-
+        // Remove the distance represented by the current dimension.
+        // The remaining distance is used for the next dimension.
         for (int i = 0; i < n; i++)
         {
             for (int j = 0; j < n; j++)
@@ -82,7 +85,7 @@ FastMapResult fastMap(const vector<vector<double>>& distance, int n, int k)
                 double difference =result.coordinates[i][dim]- result.coordinates[j][dim];
 
                 double remainingSquared =(currentDistance[i][j] * currentDistance[i][j])- (difference * difference);
-
+                // Avoid taking sqrt of a small negative value caused by floating-point errors.
                 if (remainingSquared < 0.0)
                 {
                     remainingSquared = 0.0;

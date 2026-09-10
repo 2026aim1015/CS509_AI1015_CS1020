@@ -7,6 +7,7 @@
 #include <cmath>
 
 using namespace std;
+// Check whether the input distance matrix is valid.
 bool validateDistanceMatrix(const vector<vector<double>>& distance,int n,int k)
 {
 
@@ -23,12 +24,13 @@ bool validateDistanceMatrix(const vector<vector<double>>& distance,int n,int k)
 
     for (int i = 0; i < n; i++)
     {
+        // Every row should contain n values.
         if ((int)distance[i].size() != n)
         {
             cerr << "Error: Distance matrix is not square." << endl;
             return false;
         }
-
+        // Distance from an object to itself should be zero.
         if (fabs(distance[i][i]) > 1e-9)
         {
             cerr << "Error: Diagonal distance must be zero." << endl;
@@ -42,7 +44,7 @@ bool validateDistanceMatrix(const vector<vector<double>>& distance,int n,int k)
                 cerr << "Error: Negative distance found."<< endl;
                 return false;
             }
-
+             // Distance from i to j should be the same as j to i.
             if (fabs(distance[i][j] - distance[j][i]) > 1e-9)
             {
                 cerr << "Error: Distance matrix is not symmetric."<< endl;
@@ -74,7 +76,7 @@ int main(int argc, char* argv[])
 
     int n;
     int k;
-
+    // Read the number of objects and target dimensions.
     infile >> n >> k;
 
     if (!infile)
@@ -106,6 +108,7 @@ int main(int argc, char* argv[])
     }
 
     infile.close();
+    // Check the matrix before running FastMap.
     if (!validateDistanceMatrix(distance, n, k))
     {
         return 1;
@@ -128,7 +131,7 @@ int main(int argc, char* argv[])
     {
         cout << "Dim " << dim + 1 << ": "<< result.pivotA[dim]<< " "<< result.pivotB[dim]<< endl;
     }
-
+     // Print the final coordinates of all objects.
     cout << "Object coordinates:" << endl;
 
     for (int i = 0; i < n; i++)
